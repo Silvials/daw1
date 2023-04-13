@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Ejemplo de XML en HTML </title>
+  </head>
+  <body>
+    <h1> Datos en formato XML </h1>
+    <xml version="1.0" encoding="UTF-8">
+      <personas>
+        <persona>
+          <nombre> Juan </nombre>
+          <apellido> Pérez </apellido>
+          <edad> 25 </edad>
+        </persona>
+        <persona>
+          <nombre> María </nombre>
+          <apellido> García </apellido>
+          <edad> 30 </edad>
+        </persona>
+        <persona>
+            <nombre> Silvia </nombre>
+            <apellido> Lorenzo </apellido>
+            <edad> 43 </edad>
+          </persona>
+          <persona>
+            <nombre> Guillermo </nombre>
+            <apellido> Castro </apellido>
+            <edad> 12 </edad>
+          </persona>
+      </personas>
+    </xml>
+    
+    <script>
+      const xmlDoc = new DOMParser().parseFromString(document.querySelector("xml").textContent, "text/xml");
+      const personas = xmlDoc.getElementsByTagName("persona");
+      for (let i = 0; i < personas.length; i++) {
+        const nombre = personas[i].getElementsByTagName("nombre")[0].textContent;
+        const apellido = personas[i].getElementsByTagName("apellido")[0].textContent;
+        const edad = personas[i].getElementsByTagName("edad")[0].textContent;
+        document.write(`<p>${nombre} ${apellido}, ${edad} años</p><br>`);
+      }
+    </script>
+  </body>
+</html>

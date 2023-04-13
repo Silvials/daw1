@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Leer archivo XML</title>
+  <script>
+    function leerXML() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          mostrarXML(this);
+        }
+      };
+      xhttp.open("GET", "datos.xml", true);
+      xhttp.send();
+    }
+    function mostrarXML(xml) {
+      var i;
+      var xmlDoc = xml.responseXML;
+      var tabla = "<table><tr><th>Nombre</th><th>Apellido</th></tr>";
+      var personas = xmlDoc.getElementsByTagName("persona");
+      for (i = 0; i < personas.length; i++) {
+        tabla += "<tr><td>" +
+        personas[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue +
+        "</td><td>" +
+        personas[i].getElementsByTagName("apellido")[0].childNodes[0].nodeValue +
+        "</td></tr>";
+      }
+      tabla += "</table>";
+      document.getElementById("contenedor").innerHTML = tabla;
+      alert("silvia"+tabla);
+    }
+  </script>
+</head>
+<body>
+    <div id="contenedor"></div>
+    <button onclick="alert('Silvia');leerXML();document.getElementById('contenedor').innerHTML = '<table><tr><th>Nombre</th><th>Apellido</th></tr>'">Leer archivo XML</button>
+ 
+</body>
+</html>

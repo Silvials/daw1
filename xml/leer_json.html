@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Leer archivo JSON</title>
+  <script>
+    function leerJSON() {
+      fetch("datos.json")
+        .then(response => response.json())
+        .then(data => mostrarJSON(data))
+    }
+    function mostrarJSON(data) {
+      var i;
+      var tabla = "<table><tr><th>Nombre</th><th>Apellido</th></tr>";
+      var personas = data.personas;
+      for (i = 0; i < personas.length; i++) {
+        tabla += "<tr><td>" +
+        personas[i].nombre +
+        "</td><td>" +
+        personas[i].apellido +
+        "</td></tr>";
+      }
+      tabla += "</table>";
+      document.getElementById("contenedor").innerHTML = tabla;
+      alert("Silvia "+tabla);
+    }
+  </script>
+</head>
+<body>
+  <button onclick="alert('silvia');leerJSON();">Leer archivo JSON</button>
+  <div id="contenedor"></div> 
+</body>
+</html>
